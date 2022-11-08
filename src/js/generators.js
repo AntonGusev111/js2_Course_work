@@ -1,3 +1,10 @@
+import Bowman from './characters/Bowman'
+import Daemon from './characters/Daemon'
+import Magician from './characters/Magician'
+import Swordsman from './characters/Swordsman'
+import Undead from './characters/Undead'
+import Vampire from './characters/Vampire'
+
 /**
  * Формирует экземпляр персонажа из массива allowedTypes со
  * случайным уровнем от 1 до maxLevel
@@ -8,8 +15,11 @@
  * возвращает новый экземпляр класса персонажа
  *
  */
+
 export function* characterGenerator(allowedTypes, maxLevel) {
-  // TODO: write logic here
+  let level = Math.floor(Math.random() * (Math.floor(maxLevel) - 1 + 1)) + min;
+  let character = Math.floor(Math.random() * allowedTypes.length);
+  yield new character(level)
 }
 
 /**
@@ -21,4 +31,12 @@ export function* characterGenerator(allowedTypes, maxLevel) {
  * */
 export function generateTeam(allowedTypes, maxLevel, characterCount) {
   // TODO: write logic here
+  const team = [];
+  const character = characterGenerator(allowedTypes, maxLevel);
+
+  for (let i = 0; i < characterCount; i += 1) {
+    team.push(character.next().value);
+  }
+
+  return team;
 }
