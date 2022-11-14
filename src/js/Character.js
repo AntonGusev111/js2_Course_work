@@ -19,7 +19,7 @@ export default class Character {
     this.defence = 0;
     this.health = 50;
     this.type = type;
-    if (new.target){
+    if (new.target.name === 'Character'){
       throw Error('Class not available')
     }
     // TODO: выбросите исключение, если кто-то использует "new Character()"

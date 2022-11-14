@@ -1,9 +1,4 @@
-import Bowman from './characters/Bowman'
-import Daemon from './characters/Daemon'
-import Magician from './characters/Magician'
-import Swordsman from './characters/Swordsman'
-import Undead from './characters/Undead'
-import Vampire from './characters/Vampire'
+
 
 /**
  * Формирует экземпляр персонажа из массива allowedTypes со
@@ -17,9 +12,11 @@ import Vampire from './characters/Vampire'
  */
 
 export function* characterGenerator(allowedTypes, maxLevel) {
-  let level = Math.floor(Math.random() * (Math.floor(maxLevel) - 1 + 1)) + min;
-  let character = Math.floor(Math.random() * allowedTypes.length);
-  yield new character(level)
+  for (;;) {
+    const type = Math.floor(Math.random() * allowedTypes.length);
+    const level = Math.floor(Math.random() * maxLevel) + 1;
+    yield new allowedTypes[type](level);
+  }
 }
 
 /**
